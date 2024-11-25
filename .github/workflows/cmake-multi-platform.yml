@@ -202,8 +202,8 @@ jobs:
     - name: Archive server files (Ubuntu & macOS)
       if: matrix.os != 'windows-latest'
       run: |
-        cd ${{ steps.strings.outputs.build-output-dir }}/release_out
-        tar -czf join_server.tar.gz server library
+        cd ${{ steps.strings.outputs.build-output-dir }}
+        tar -czf join_server.tar.gz release_out
 
 
     - name: Upload Release Asset (Ubuntu & macOS)
@@ -214,7 +214,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.strings.outputs.build-output-dir }}/release_out/join_server.tar.gz
+        asset_path: ${{ steps.strings.outputs.build-output-dir }}/join_server.tar.gz
         asset_name: join_server-${{ matrix.os }}-0.0.${{ github.run_number }}.tar.gz
         asset_content_type: application/gzip
 
